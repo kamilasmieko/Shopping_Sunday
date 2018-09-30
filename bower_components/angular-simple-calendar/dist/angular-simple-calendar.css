@@ -1,0 +1,134 @@
+/*  RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  font-size: .625em;
+  font-family: $main_font;
+}
+
+body{
+  font-size: 2rem;
+}
+
+
+/* CALENDAR */
+simple-calendar * {
+  user-select: none;
+}
+
+simple-calendar .calendar{
+  border: 1px solid #dddddd;
+  border-radius: 1rem;
+  user-select: none;
+  background-color: #fff;
+  width: 85rem;
+  height: 63.5rem;
+  padding: 1.5rem 2.5rem;
+}
+
+/*  NEXT & PREV navigation for months */
+simple-calendar .move-month {
+  cursor: pointer;
+  color: white;
+  font-size: 3rem;
+}
+
+simple-calendar .prev-month {
+  float: left;
+}
+
+simple-calendar .next-month {
+  float: right;
+}
+
+simple-calendar .prev-month > span, simple-calendar .next-month > span{
+  padding: .5rem 1.5rem;
+  background-color: grey;
+  border-radius: .5rem;
+}
+
+simple-calendar .current-month {
+  width: 100%;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+simple-calendar .week {
+  height: 8rem;
+}
+
+simple-calendar .weekday {
+  text-align: center;
+}
+
+simple-calendar .week .day:last-child {
+  border-right: none;
+}
+
+simple-calendar .weekday, .day {
+  display: inline-block;
+  width: calc(100% / 7);
+}
+
+simple-calendar .day {
+  font-size: 2.5rem;
+  height: 7rem;
+  padding: .5rem;
+  border: 1px solid #dddddd;
+  border-bottom: none;
+  border-left: none;
+  overflow: hidden;
+}
+
+simple-calendar .day:hover {
+  cursor: pointer;
+}
+
+simple-calendar .day.default {
+  background-color: black;
+  color: white;
+  /* box-shadow: -1px -1px 8px 0 black; */
+}
+
+simple-calendar .day.event {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+simple-calendar .day > .event-title{
+  font-size: 1.8rem;
+}
+
+simple-calendar .day.disabled {
+  cursor: default;
+  color: silver;
+  background-color: white;
+}
+
+/*  LEGEND */
+.legend{
+  width: 85rem;
+  border-radius: 1rem;
+  border-top: none;
+  border: 1px solid #dddddd;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.circle{
+  border: .4rem solid #fff;
+  box-shadow: 0 0 0 1px #dddddd;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  margin-right: 1.5rem;
+}
+
+.red{
+  background-color: #ff4d4d;
+}

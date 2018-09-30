@@ -1,0 +1,13 @@
+{
+  "name": "shopping_sunday",
+  "homepage": "https://github.com/kamilasmieko/Shopping_Sunday",
+  "authors": [
+    "kamilasmieko <ksmieko@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "dependencies": {
+    "angular-simple-calendar": "^1.1.4"
+  }
+}
