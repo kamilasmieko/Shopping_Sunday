@@ -26,11 +26,17 @@ angular.module('500tech.simple-calendar', []).directive('simpleCalendar', functi
       'ng-class="{default: isDefaultDate(date), event: date.event, disabled: date.disabled || !date}"' +
       'ng-repeat="date in week  track by $index"' +
       'ng-click="onClick(date)">' +
-      '<div class="day-number">{{ date.day || "&nbsp;" }}</div>' +
+      '<div class="day-number" >'+
+      '<div class="circle red" ng-show="date.event.freeSun"><span>{{ date.day || "&nbsp;" }}</span></div>'+
+      '</div>' +
+      '<div class="day-number" ng-show="!date.event.freeSun" >{{ date.day || "&nbsp;" }}</div>' +
       '<div class="event-title">{{ date.event.title || "&nbsp;" }}</div>' +
       ' </div>' +
       '</div>' +
       '</div>' +
+      '</div>' +
+      '<div class="legend">'+
+      '<div class="circle red"></div><span> - &nbsp Stores Closed on Sunday</span>'+
       '</div>',
     controller: ['$scope', function ($scope) {
       var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
