@@ -3,6 +3,7 @@
 <head>
   <title> ShoppingSunday </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
   <link rel="stylesheet" href="bower_components/angular-simple-calendar/dist/angular-simple-calendar.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script type="text/javascript" src="bower_components/angular-simple-calendar/dist/angular-simple-calendar.js"></script>
@@ -12,27 +13,57 @@
 
 <div ng-app="shoppingSunday" ng-controller="myCtrl">
 
-<h2>Today is {{today | date:'EEEE'}},
-    <span>{{today | date:'dd-MMMM'}}</span>, week: <span>{{today | date:'ww'}}</span>
-</h2>
+<div class="background" ng-style='background'>
+  <div class="container">
 
+    <div class="title">
+      NIEDZIELA HANDLOWA
+    </div>
 
-<div class="" ng-repeat="event in events | filter:currentWeek:true">
-<!-- <div class="" ng-repeat="event in events"> -->
-  {{ event.week }}
+    <div class="sunday_info">
+      <div>
+        <h1 ng-style="blackOrWhite">Dzień dobry!</h1>
+
+        <!--  TEST: display today's date -->
+        <div class="" style="color: red">
+          TODAY: {{today | date:short}}
+          WEEK: {{currentWeek}}
+          {{ getWeekNumber() }}
+        </div>
+        <!-- TEST END -->
+
+        <p ng-style="blackOrWhite">W najbliższą niedzielę ( {{sundayDate | date:'dd.MM'}} ) sklepy będą:</p>
+      </div>
+
+      <div class="circle" ng-style="CircleBlackOrWhite">
+        <span ng-show="!closed" style="color: black">OTWARTE</span>
+        <span ng-show="closed" style="color: white">ZAMKNIĘTE</span>
+      </div>
+
+      <div class="post" ng-style="blackOrWhite">
+        <span>{{quote}}</span>
+      </div>
+      <br/>
+      <div class="text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
-<h1>This upcoming Sunday stores will be
-  <span ng-show="!closed" > open, </span>
-  <span ng-show="closed" > closed, </span>
-  <span style="color: red"> &nbsp; week: {{currentWeek}}</span>
-</h1>
+<footer>
 
-<div class="calendar" ng-click="showCalendar()">
+</footer>
+
+
+<!--  CALENDAR  -->
+<!-- <div class="calendar" ng-click="showCalendar()">
   Show Calendar
 </div>
-
-<simple-calendar ng-show="showCal" events="events" options="calendarOptions"></simple-calendar>
+<simple-calendar ng-show="showCal" events="events" options="calendarOptions"></simple-calendar> -->
 
 
 </div> <!-- myCtrl end -->
@@ -43,75 +74,131 @@ var app = angular.module('shoppingSunday', ['500tech.simple-calendar']);
 
 app.controller('myCtrl', ['$scope', '$filter', function($scope, $filter) {
 
-  // TODAY'S DATE
+  // TODAY's date
+  // $scope.today = new Date(2018, 9, 17); //TESTING
   $scope.today = new Date();
-  // $scope.today = new Date(2018, 10, 12);
-  // $scope.today = '2018-10-12T20:07:28.801Z';
 
-  // DETERMINE CURRENT YEAR'S WEEK NUMBER
-  $scope.currentWeek = +$filter('date')(new Date($scope.today.getFullYear(), $scope.today.getMonth(), $scope.today.getDate()), 'ww', 'UTC');
+  // DETERMINE CURRENT YEAR'S WEEK NUMBER (UTC added in order to count week's number starting MON)
+  $scope.currentWeek =  +$filter('date')(new Date( $scope.today.getFullYear(), $scope.today.getMonth(), $scope.today.getDate()), 'ww', 'UTC');
 
-  // OPEN / CLOSE message
+  $scope.sundayDate, $scope.quote;
   $scope.closed = false;
-  // change value comparing current week with the value of the week in events list
-  angular.forEach($scope.events, function (val){
-    if(val.week == $scope.currentWeek){
-      $scope.closed = true;
-      console.log('found it!');
-    }
-  })
 
-  // SHOW / HIDE CALENDAR
-  $scope.showCal = false;
-  $scope.showCalendar = () => {
-    $scope.showCal = !$scope.showCal;
+  // BACKGROUND style
+  $scope.background = {
+      "background" : "yellow" //if no image loaded
   }
+  // STYLES:
+  $scope.CircleBlackOrWhite, $scope.blackOrWhite;
 
-  //BASIC CALENDAR
-  // Dates can be passed as strings or Date objects
-  $scope.calendarOptions = {
-    defaultDate: $scope.today,
-    minDate: +$filter('date')(new Date($scope.today.getFullYear(), $scope.today.getMonth(), $scope.today.getDate()), 'yyyy, mm, dd', 'UTC'),
-    // minDate: new Date([2018, 10, 1]),
-    maxDate: new Date([2020, 12, 31]),
-    dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
-    multiEventDates: true, // Set the calendar to render multiple events in the same day or only one event, default is false
-    maxEventsPerDay: 1, // Set how many events should the calendar display before showing the 'More Events' message, default is 3;
-    eventClick: $scope.eventClick,
-    dateClick: $scope.dateClick
-  };
 
-  $scope.events = [
-      {title: '', freeSun: true, date: new Date([2018, 10, 14]), week: 41},
-      {title: '', freeSun: true, date: new Date([2018, 10, 21]), week: 42},
-      {title: 'Independance Day', freeSun: true, date: new Date([2018, 11, 11]), week: 45},
-      {title: '', freeSun: true, date: new Date([2018, 11, 18]), week: 46},
-      {title: '', freeSun: true, date: new Date([2018, 12, 9]), week: 49},
-      {title: 'New Years Day',  freeSun: false, date: new Date([2019, 1, 1]), week: ''},
-      {title: 'Three Kings',  freeSun: true, date: new Date([2019, 1, 6]), week: 1},
-      {title: '', freeSun: true, date: new Date([2019, 1, 13]), week: 2},
-      {title: '', freeSun: true, date: new Date([2019, 1, 20]), week: 3},
-      {title: '', freeSun: true, date: new Date([2019, 2, 3]), week: 5},
-      {title: '', freeSun: true, date: new Date([2019, 2, 10]), week: 6},
-      {title: '', freeSun: true, date: new Date([2019, 2, 17]), week: 7},
-      {title: '', freeSun: true, date: new Date([2019, 3, 3]), week: 9},
-      {title: '', freeSun: true, date: new Date([2019, 3, 10]), week: 10},
-      {title: '', freeSun: true, date: new Date([2019, 3, 17]), week: 11},
-      {title: '', freeSun: true, date: new Date([2019, 3, 24]), week: 12},
-      {title: '', freeSun: true, date: new Date([2019, 4, 7]), week: 14},
-      {title: 'Easter', freeSun: true, date: new Date([2019, 4, 21]), week: 16},
-      {title: 'Easter Monday', freeSun: false, date: new Date([2019, 4, 22]), week: ''},
-      {title: 'Labour Day', freeSun: false, date: new Date([2019, 5, 1]), week: ''},
-      {title: 'Constitiution Day', freeSun: false, date: new Date([2019, 5, 3]), week: ''},
-      {title: '', freeSun: true, date: new Date([2019, 5, 5]), week: 18},
-      {title: '', freeSun: true, date: new Date([2019, 5, 12]), week: 19},
-      {title: '', freeSun: true, date: new Date([2019, 5, 19]), week: 20},
-      {title: '', freeSun: true, date: new Date([2019, 6, 2]), week: 23},
-      {title: 'Pentecost', freeSun: true, date: new Date([2019, 6, 9]), week: 24},
-      {title: '',  freeSun: true, date: new Date([2019, 6, 16]), week: 25},
-      {title: '', freeSun: true, date: new Date([2019, 6, 23]), week: 26}
+  // SUNDAYS - when stores are closed;
+  $scope.sundays = [
+    {freeSun: false, date: new Date(2018, 9, 7), week: 40, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat fixed center", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: true, date: new Date(2018, 9, 14), week: 41, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2018, 9, 21), week: 42, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: false, date: new Date(2018, 9, 28), week: 43, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg') no-repeat fixed center", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: false, date: new Date(2018, 10, 4), week: 44, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat fixed center", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: true, date: new Date(2018, 10, 11), week: 45, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2018, 10, 18), week: 46, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: false, date: new Date(2018, 10, 25), week: 47, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg') no-repeat fixed center", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: false, date: new Date(2018, 11, 2), week: 48, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat fixed center", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: true, date: new Date(2018, 11, 9), week: 49, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 1, 6), week: 1, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 1, 13), week: 2, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 1, 20), week: 3, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 2, 3), week: 5, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 2, 10), week: 6, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 2, 17), week: 7, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 3), week: 9, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 10), week: 10, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 17), week: 11, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 24), week: 12, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 4, 7), week: 14, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 4, 21), week: 16, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 5, 5), week: 18, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 5, 12), week: 19, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 5, 19), week: 20, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 2), week: 22, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 9), week: 23, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 16), week: 24, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 23), week: 25, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"}
     ];
 
+    // based on week's number applly changes to $scope variables
+    angular.forEach($scope.sundays, function (val){
+      // STORES CLOSED
+      if(val.week == $scope.currentWeek && val.freeSun){
+        $scope.closed = true;
+        $scope.sundayDate = val.date;
+        $scope.quote = val.quote;
+        // STYLES change:
+        $scope.background = {
+          "background" : val.background
+        }
+        $scope.CircleBlackOrWhite = {
+          "background" : "black"
+        }
+        $scope.blackOrWhite = {
+          "background" : "white",
+          "color" : "black"
+        }
+        console.log('found the week! Sunday OFF', $scope.sundayDate);
+      }
+      // STORES OPEN
+      else if(val.week == $scope.currentWeek && !val.freeSun){
+        $scope.sundayDate = val.date;
+        $scope.quote = val.quote;
+        // STYLES change:
+        $scope.background = {
+          "background" : val.background
+        }
+        $scope.CircleBlackOrWhite = {
+          "background" : "white"
+        }
+        $scope.blackOrWhite = {
+          "background" : "black",
+          "color" : "white"
+        }
+        console.log('WORKING Sunday', $scope.sundayDate);
+      }
+
+    })
+
+
+
+
+
+  // // SHOW / HIDE CALENDAR
+  // $scope.showCal = false;
+  // $scope.showCalendar = () => {
+  //   $scope.showCal = !$scope.showCal;
+  // }
+  //
+  // //BASIC CALENDAR
+  // // Dates can be passed as strings or Date objects
+  // $scope.calendarOptions = {
+  //   defaultDate: $scope.today,
+  //   minDate: +$filter('date')(new Date($scope.today.getFullYear(), $scope.today.getMonth(), $scope.today.getDate()), 'yyyy, mm, dd', 'UTC'),
+  //   // minDate: new Date([2018, 10, 1]),
+  //   maxDate: new Date([2020, 12, 31]),
+  //   dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
+  //   multiEventDates: true, // Set the calendar to render multiple events in the same day or only one event, default is false
+  //   maxEventsPerDay: 1, // Set how many events should the calendar display before showing the 'More Events' message, default is 3;
+  //   eventClick: $scope.eventClick,
+  //   dateClick: $scope.dateClick
+  // };
+  //
+  // $scope.events = [
+  //     {title: 'Independance Day', freeSun: true, date: new Date([2018, 11, 11]), week: 45},
+  //     {title: 'New Years Day',  freeSun: false, date: new Date([2019, 1, 1]), week: ''},
+  //     {title: 'Three Kings',  freeSun: true, date: new Date([2019, 1, 6]), week: 1},
+  //     {title: 'Easter', freeSun: true, date: new Date([2019, 4, 21]), week: 16},
+  //     {title: 'Easter Monday', freeSun: false, date: new Date([2019, 4, 22]), week: ''},
+  //     {title: 'Labour Day', freeSun: false, date: new Date([2019, 5, 1]), week: ''},
+  //     {title: 'Constitiution Day', freeSun: false, date: new Date([2019, 5, 3]), week: ''},
+  //     {title: 'Pentecost', freeSun: true, date: new Date([2019, 6, 9]), week: 24}
+  //   ];
 
 }]);
 
