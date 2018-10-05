@@ -32,21 +32,11 @@ body{
 }
 
 .post{
-  /* width: 53.6rem; */
-  /* height: 16.5rem; */
-  /* font-size: 3.2rem; */
   font-weight: bold;
-  /* padding: 3.5rem 3.3rem 1.3rem 3.4rem; */
-  /* margin-top: 85.6rem; */
-  /* margin-bottom: 10.2rem; */
   position: relative;
 }
 #triangle-bottomright {
   position: absolute;
-  /* top: -4rem; */
-  /* right: 7rem; */
-	/* border-bottom: 4rem solid black; */
-	/* border-left: 4rem solid transparent; */
 }
 
 .sunday_info{
@@ -54,19 +44,19 @@ body{
 }
 
 .sunday_info h1{
-  width: 36.3rem;
-  height: 7.5rem;
+  /* width: 36.3rem; */
+  /* height: 7.5rem; */
   text-align: center;
-  font-size: 4.4rem;
+  /* font-size: 4.4rem; */
 }
 
 .sunday_info p{
-  width: 81.2rem;
-  height: 7.5rem;
+  /* width: 81.2rem; */
+  /* height: 7.5rem; */
   text-align: center;
-  font-size: 3.2rem;
-  padding: 1.4rem 0 1.3rem 0;
-  margin: 1.1rem 0 3.8rem 0;
+  /* font-size: 3.2rem; */
+  /* padding: 1.4rem 0 1.3rem 0; */
+  /* margin: 1.1rem 0 3.8rem 0; */
 }
 
 .circle{
@@ -96,20 +86,29 @@ footer{
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .container{
+
+  div.container:first-of-type{
     display: block;
     height: 155rem;
+
   }
-  [class*='col']{
+  /* [class*='col']{
+    width: 100vw;
     display: block;
-  }
+  } */
   .col-1{
     display: flex;
-
+    position: relative;
+  }
+  .col-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3.2rem;
   }
 
   .title{
-    margin-top: 2.5rem;
+    margin: 2.5rem 0 0 3.8rem;
     width: 13.4rem;
     height: 5.4rem;
     font-size: 1.8rem;
@@ -120,11 +119,10 @@ footer{
     width: 30.4rem;
     height: 11.4rem;
     font-size: 2rem;
-    /* font-weight: bold; */
     padding: 2.55rem 1.35rem 1.05rem 1.45rem;
-    /* margin-top: 85.6rem; */
     margin-bottom: 10.2rem;
-    /* position: relative; */
+    position: absolute;
+    top: 50rem;
   }
   #triangle-bottomright {
     /* position: absolute; */
@@ -134,11 +132,33 @@ footer{
     border-left: 2.5rem solid transparent;
   }
 
+  .sunday_info h1{
+    display: inline-block;
+    width: 20.6rem;
+    height: 6.2rem;
+    font-size: 2.6rem;
+    padding: 1rem .8rem;
+  }
+
+  .sunday_info p{
+    /* display: inline-block; */
+    width: 30.4rem;
+    height: 8rem;
+    font-size: 2rem;
+    margin-top: 1rem;
+    padding: 1rem 4rem;
+  }
+
+  .circle{
+    display: inline-block;
+  }
+
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) and (max-width: 992px){
-  .container{
+  div.container:first-of-type{
     display: block;
     height: 102.4rem;
   }
@@ -176,6 +196,20 @@ footer{
   	border-left: 4rem solid transparent;
   }
 
+  .sunday_info h1{
+    width: 36.3rem;
+    height: 7.5rem;
+    font-size: 4.4rem;
+  }
+
+  .sunday_info p{
+    width: 81.2rem;
+    height: 7.5rem;
+    font-size: 3.2rem;
+    padding: 1.4rem 0 1.3rem 0;
+    margin: 1.1rem 0 3.8rem 0;
+  }
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -184,7 +218,7 @@ footer{
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 
-  .container{
+  div.container:first-of-type{
     max-width: 170.4rem;
     height: 128.8rem;
     display: flex;
@@ -241,6 +275,20 @@ footer{
     right: 7rem;
   	border-bottom: 4rem solid black;
   	border-left: 4rem solid transparent;
+  }
+
+  .sunday_info h1{
+    width: 36.3rem;
+    height: 7.5rem;
+    font-size: 4.4rem;
+  }
+
+  .sunday_info p{
+    width: 81.2rem;
+    height: 7.5rem;
+    font-size: 3.2rem;
+    padding: 1.4rem 0 1.3rem 0;
+    margin: 1.1rem 0 3.8rem 0;
   }
 
 

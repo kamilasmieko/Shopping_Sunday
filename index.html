@@ -11,9 +11,16 @@
 
 <body>
 
-<div ng-app="shoppingSunday" ng-controller="myCtrl">
+<div window-size ng-app="shoppingSunday" ng-controller="myCtrl">
+    <!-- TEST: based on widnow width -->
+    <!-- <div ng-show="windowWidth > 500">
+      <h4 style="background: blue">It works!</h4>
+      <p style="margin:0">window.height: {{windowHeight}}</p>
+      <p style="margin:0">window.width: {{windowWidth}}</p>
+    </div> -->
 
-<div class="background" ng-style='background'>
+<div class="background" ng-style="windowWidth > 601 && {{background}} || {{background_mobile}}">
+
   <div class="container">
 
     <div class="col-1">
@@ -80,26 +87,18 @@
   </div>
 </footer>
 
-
-
-<!--  CALENDAR  -->
-<!-- <div class="calendar" ng-click="showCalendar()">
-  Show Calendar
-</div>
-<simple-calendar ng-show="showCal" events="events" options="calendarOptions"></simple-calendar> -->
-
-
 </div> <!-- myCtrl end -->
 
 
 <script>
+
 var app = angular.module('shoppingSunday', []);
 
-app.controller('myCtrl', ['$scope', '$filter', function($scope, $filter) {
+app.controller('myCtrl', ['$scope', '$filter', '$window', function($scope, $filter, $window) {
 
   // TODAY's date
-  // $scope.today = new Date(2018, 9, 17); //TESTING
-  $scope.today = new Date();
+  $scope.today = new Date(2018, 9, 17); //TESTING
+  // $scope.today = new Date();
 
   // DETERMINE CURRENT YEAR'S WEEK NUMBER (UTC added in order to count week's number starting MON)
   $scope.currentWeek =  +$filter('date')(new Date( $scope.today.getFullYear(), $scope.today.getMonth(), $scope.today.getDate()), 'ww', 'UTC');
@@ -109,7 +108,10 @@ app.controller('myCtrl', ['$scope', '$filter', function($scope, $filter) {
 
   // BACKGROUND style
   $scope.background = {
-      "background" : "yellow" //if no image loaded
+    "background" : "yellow" //if no image loaded
+  }
+  $scope.background_mobile= {
+    "background" : "red"//if no image loaded
   }
   // STYLES:
   $scope.CircleBlackOrWhite, $scope.blackOrWhite;
@@ -117,36 +119,37 @@ app.controller('myCtrl', ['$scope', '$filter', function($scope, $filter) {
 
   // SUNDAYS - when stores are closed;
   $scope.sundays = [
-    {freeSun: false, date: new Date(2018, 9, 7), week: 40, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: true, date: new Date(2018, 9, 14), week: 41, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2018, 9, 21), week: 42, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: false, date: new Date(2018, 9, 28), week: 43, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg') no-repeat fixed center", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: false, date: new Date(2018, 10, 4), week: 44, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat fixed center", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: true, date: new Date(2018, 10, 11), week: 45, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2018, 10, 18), week: 46, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: false, date: new Date(2018, 10, 25), week: 47, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg') no-repeat fixed center", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: false, date: new Date(2018, 11, 2), week: 48, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat fixed center", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: true, date: new Date(2018, 11, 9), week: 49, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 1, 6), week: 1, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 1, 13), week: 2, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 1, 20), week: 3, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 2, 3), week: 5, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 2, 10), week: 6, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 2, 17), week: 7, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 3, 3), week: 9, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 3, 10), week: 10, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 3, 17), week: 11, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 3, 24), week: 12, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 4, 7), week: 14, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 4, 21), week: 16, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 5, 5), week: 18, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 5, 12), week: 19, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 5, 19), week: 20, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 6, 2), week: 22, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 6, 9), week: 23, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 6, 16), week: 24, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 6, 23), week: 25, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat fixed center", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"}
+    {freeSun: false, date: new Date(2018, 9, 7), week: 40, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat center/cover", background_mobile: "url('./src/img/frankie-cordoba-526925-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: true, date: new Date(2018, 9, 14), week: 41, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2018, 9, 21), week: 42, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: false, date: new Date(2018, 9, 28), week: 43, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg') no-repeat center/cover", background_mobile: "url('./src/img/anna-utochkina-672220-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: false, date: new Date(2018, 10, 4), week: 44, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat center/cover", background_mobile: "url('./src/img/frankie-cordoba-526925-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: true, date: new Date(2018, 10, 11), week: 45, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2018, 10, 18), week: 46, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: false, date: new Date(2018, 10, 25), week: 47, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg') no-repeat center/cover", background_mobile: "url('./src/img/anna-utochkina-672220-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: false, date: new Date(2018, 11, 2), week: 48, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat center/cover", background_mobile: "url('./src/img/frankie-cordoba-526925-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: true, date: new Date(2018, 11, 9), week: 49, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 1, 6), week: 1, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 1, 13), week: 2, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 1, 20), week: 3, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 2, 3), week: 5, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 2, 10), week: 6, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 2, 17), week: 7, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 3), week: 9, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 10), week: 10, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 17), week: 11, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 24), week: 12, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 4, 7), week: 14, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 4, 21), week: 16, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 5, 5), week: 18, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 5, 12), week: 19, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 5, 19), week: 20, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 2), week: 22, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 9), week: 23, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 16), week: 24, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 23), week: 25, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"}
     ];
+
 
     // based on week's number applly changes to $scope variables
     angular.forEach($scope.sundays, function (val){
@@ -158,6 +161,9 @@ app.controller('myCtrl', ['$scope', '$filter', function($scope, $filter) {
         // STYLES change:
         $scope.background = {
           "background" : val.background
+        }
+        $scope.background_mobile = {
+          "background" : val.background_mobile
         }
         $scope.CircleBlackOrWhite = {
           "background" : "black"
@@ -176,6 +182,9 @@ app.controller('myCtrl', ['$scope', '$filter', function($scope, $filter) {
         $scope.background = {
           "background" : val.background
         }
+        $scope.background_mobile = {
+          "background" : val.background_mobile
+        }
         $scope.CircleBlackOrWhite = {
           "background" : "white"
         }
@@ -188,42 +197,40 @@ app.controller('myCtrl', ['$scope', '$filter', function($scope, $filter) {
 
     })
 
-
-
-
-
-  // // SHOW / HIDE CALENDAR
-  // $scope.showCal = false;
-  // $scope.showCalendar = () => {
-  //   $scope.showCal = !$scope.showCal;
-  // }
-  //
-  // //BASIC CALENDAR
-  // // Dates can be passed as strings or Date objects
-  // $scope.calendarOptions = {
-  //   defaultDate: $scope.today,
-  //   minDate: +$filter('date')(new Date($scope.today.getFullYear(), $scope.today.getMonth(), $scope.today.getDate()), 'yyyy, mm, dd', 'UTC'),
-  //   // minDate: new Date([2018, 10, 1]),
-  //   maxDate: new Date([2020, 12, 31]),
-  //   dayNamesLength: 3, // How to display weekdays (1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names; default is 1)
-  //   multiEventDates: true, // Set the calendar to render multiple events in the same day or only one event, default is false
-  //   maxEventsPerDay: 1, // Set how many events should the calendar display before showing the 'More Events' message, default is 3;
-  //   eventClick: $scope.eventClick,
-  //   dateClick: $scope.dateClick
-  // };
-  //
-  // $scope.events = [
-  //     {title: 'Independance Day', freeSun: true, date: new Date([2018, 11, 11]), week: 45},
-  //     {title: 'New Years Day',  freeSun: false, date: new Date([2019, 1, 1]), week: ''},
-  //     {title: 'Three Kings',  freeSun: true, date: new Date([2019, 1, 6]), week: 1},
-  //     {title: 'Easter', freeSun: true, date: new Date([2019, 4, 21]), week: 16},
-  //     {title: 'Easter Monday', freeSun: false, date: new Date([2019, 4, 22]), week: ''},
-  //     {title: 'Labour Day', freeSun: false, date: new Date([2019, 5, 1]), week: ''},
-  //     {title: 'Constitiution Day', freeSun: false, date: new Date([2019, 5, 3]), week: ''},
-  //     {title: 'Pentecost', freeSun: true, date: new Date([2019, 6, 9]), week: 24}
-  //   ];
+    // $scope.getWindowSize = function(){
+    //   if($window.innerWidth < 500){
+    //     console.log('f.getWindowSize: ', $window.innerWidth);
+    //   }
+    // }
 
 }]);
+
+app.directive('windowSize', function ($window) {
+  return function (scope, element) {
+    scope.getWindowDimensions = function () {
+        console.log('f.getWindowDimensions: WIDTH:', $window.innerWidth);
+        console.log('f.getWindowDimensions: HEIGHT:', $window.innerHeight);
+        return {
+            'h': $window.innerHeight,
+            'w': $window.innerWidth
+        };
+    };
+    scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+      scope.windowHeight = newValue.h;
+      scope.windowWidth = newValue.w;
+      scope.style = function () {
+          return {
+              'height': (newValue.h - 100) + 'px',
+              'width': (newValue.w - 100) + 'px'
+          };
+      };
+    }, true);
+
+    angular.element($window).bind('resize', function () {
+        scope.$apply();
+    });
+  }
+})
 
 
 </script>
