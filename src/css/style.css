@@ -44,27 +44,16 @@ body{
 }
 
 .sunday_info h1{
-  /* width: 36.3rem; */
-  /* height: 7.5rem; */
   text-align: center;
-  /* font-size: 4.4rem; */
 }
 
 .sunday_info p{
-  /* width: 81.2rem; */
-  /* height: 7.5rem; */
   text-align: center;
-  /* font-size: 3.2rem; */
-  /* padding: 1.4rem 0 1.3rem 0; */
-  /* margin: 1.1rem 0 3.8rem 0; */
 }
 
 .circle{
-  width: 53.6rem;
-  height: 53.6rem;
   border-radius: 50%;
   background-color: white;
-  font-size: 6.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,11 +61,15 @@ body{
 
 /* scrollbar hidden by height,width: 100% & padding-right & box-sizing + .col-3 - height,width: 100% & overflow: hidden*/
 .text{
-  overflow-y: scroll;
-  width: 100%;
-  height: 100%;
-  padding-right: 1.5rem;
   box-sizing: content-box;
+}
+/* works only in chrome */
+::-webkit-scrollbar {
+    display: none;
+}
+/* mozilla scrollbar hidden */
+.col-3{
+  overflow: hidden;
 }
 
 footer{
@@ -84,30 +77,45 @@ footer{
   flex-shrink: 0;
 }
 
+.blk_pipe{
+  background-color: black;
+}
+
+.icons{
+  display: flex;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
   div.container:first-of-type{
     display: block;
-    height: 155rem;
-
+    height: 145rem;
   }
-  /* [class*='col']{
-    width: 100vw;
-    display: block;
-  } */
-  .col-1{
+
+  div.container:first-of-type .col-1{
     display: flex;
     position: relative;
+    flex-direction: column;
+    align-items: center;
   }
-  .col-2{
+  div.container:first-of-type .col-2{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3.2rem;
+    margin-top: 2.77rem;
+  }
+
+  div.container:first-of-type .col-3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
   }
 
   .title{
+    align-self: flex-start;
     margin: 2.5rem 0 0 3.8rem;
     width: 13.4rem;
     height: 5.4rem;
@@ -119,21 +127,18 @@ footer{
     width: 30.4rem;
     height: 11.4rem;
     font-size: 2rem;
-    padding: 2.55rem 1.35rem 1.05rem 1.45rem;
-    margin-bottom: 10.2rem;
+    padding: 2.65rem 1.35rem 1.05rem 1.45rem;
     position: absolute;
-    top: 50rem;
+    top: 61rem;
   }
   #triangle-bottomright {
-    /* position: absolute; */
     top: -2rem;
     right: 4rem;
-    border-bottom: 2.5rem solid black;
-    border-left: 2.5rem solid transparent;
+    border-bottom: 3rem solid black;
+    border-left: 3rem solid transparent;
   }
 
   .sunday_info h1{
-    display: inline-block;
     width: 20.6rem;
     height: 6.2rem;
     font-size: 2.6rem;
@@ -141,73 +146,143 @@ footer{
   }
 
   .sunday_info p{
-    /* display: inline-block; */
     width: 30.4rem;
     height: 8rem;
     font-size: 2rem;
-    margin-top: 1rem;
+    margin: 1rem 0 2.718rem 0;
     padding: 1rem 4rem;
   }
 
   .circle{
-    display: inline-block;
+    width: 30.46rem;
+    height: 30.4rem;
+    font-size: 3.8rem;
+    margin-bottom: 14.6rem;
   }
 
+  /* scrollbar hidden by height,width: 100% & padding-right & box-sizing + .col-3 - height,width: 100% & overflow: hidden*/
+  .text{
+    overflow-y: scroll;
+    width: 30.4rem;
+    height: 69.6rem;
+    padding-right: 1.5rem;
+    margin-left: 4rem;
+  }
+
+  footer{
+    font-size: 1.5rem;
+    height: 8.4rem;
+    width: 32.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icons img{
+    margin-left: 3.2rem;
+    margin-top: 1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
 
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) and (max-width: 992px){
+
   div.container:first-of-type{
     display: block;
-    height: 102.4rem;
+    height: 115.5rem;
   }
 
-  [class*='col']{
-    display: block;
+  div.container:first-of-type .col-1{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+  }
+  div.container:first-of-type .col-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3.2rem;
+  }
+  div.container:first-of-type .col-3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
   }
 
   .title{
-    margin-top: 3.7rem;
+    align-self: flex-start;
+    margin: 3.7rem 0 0 8.2rem;
     width: 17rem;
     height: 7rem;
     font-size: 2.2rem;
     padding: .8rem 1.6rem .7rem 1.7rem;
-    /* background-color: white; */
-    /* font-weight: bold; */
-    /* line-height: 130%; */
   }
 
   .post{
-    width: 53.6rem;
-    height: 16.5rem;
-    font-size: 3.2rem;
-    /* font-weight: bold; */
-    padding: 3.5rem 3.3rem 1.3rem 3.4rem;
-    /* margin-top: 85.6rem; */
-    margin-bottom: 10.2rem;
-    /* position: relative; */
+    width: 40rem;
+    height: 12rem;
+    font-size: 2.4rem;
+    padding: 2.31rem 3.367rem .964rem 3.61rem;
+    position: absolute;
+    top: 72rem;
   }
   #triangle-bottomright {
-    /* position: absolute; */
-    top: -4rem;
-    right: 7rem;
-  	border-bottom: 4rem solid black;
-  	border-left: 4rem solid transparent;
+    top: -3rem;
+    right: 5.5rem;
+  	border-bottom: 3rem solid black;
+  	border-left: 3rem solid transparent;
   }
 
   .sunday_info h1{
-    width: 36.3rem;
-    height: 7.5rem;
-    font-size: 4.4rem;
+    width: 27rem;
+    height: 5.6rem;
+    font-size: 3.2rem;
+    padding: .5rem;
   }
 
   .sunday_info p{
-    width: 81.2rem;
-    height: 7.5rem;
-    font-size: 3.2rem;
-    padding: 1.4rem 0 1.3rem 0;
-    margin: 1.1rem 0 3.8rem 0;
+    width: 60.6rem;
+    height: 5.6rem;
+    font-size: 2.4rem;
+    padding: 1rem;
+    margin: .821rem 0 2.837rem 0;
+  }
+
+  .circle{
+    width: 40rem;
+    height: 40rem;
+    font-size: 5rem;
+    margin-bottom: 17.8rem;
+  }
+
+  /* scrollbar hidden by height,width: 100% & padding-right & box-sizing + .col-3 - height,width: 100% & overflow: hidden*/
+  .text{
+    overflow-y: scroll;
+    width: 60.8rem;
+    height: 28.2rem;
+    padding-right: 1.5rem;
+    margin-left: 2rem;
+  }
+
+  footer{
+    width: 60.8rem;
+    height: 6.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .icons img{
+    margin-left: 2.2rem;
+    width: 4rem;
+    height: 4rem;
   }
 
 }
@@ -235,16 +310,17 @@ footer{
     align-items: flex-start;
   }
 
-  .col-1{
+  div.container:first-of-type .col-1{
     justify-content: space-between;
   }
 
-  .col-2{
+  div.container:first-of-type .col-2{
     justify-content: center;
     align-items: center;
+    margin-top: -20rem;
   }
 
-  .col-3{
+  div.container:first-of-type .col-3{
     margin-left: 5.55rem;
     width: 100%;
     height: 100%;
@@ -263,14 +339,10 @@ footer{
     width: 53.6rem;
     height: 16.5rem;
     font-size: 3.2rem;
-    /* font-weight: bold; */
     padding: 3.5rem 3.3rem 1.3rem 3.4rem;
-    /* margin-top: 85.6rem; */
     margin-bottom: 10.2rem;
-    /* position: relative; */
   }
   #triangle-bottomright {
-    /* position: absolute; */
     top: -4rem;
     right: 7rem;
   	border-bottom: 4rem solid black;
@@ -291,14 +363,61 @@ footer{
     margin: 1.1rem 0 3.8rem 0;
   }
 
+  .circle{
+    width: 53.6rem;
+    height: 53.6rem;
+    border-radius: 50%;
+    background-color: white;
+    font-size: 6.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .empty{
-    height: 95.9rem;
+    height: 102rem;
+  }
+
+  /* scrollbar hidden by height,width: 100% & padding-right & box-sizing + .col-3 - height,width: 100% & overflow: hidden*/
+  .text{
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
+    padding-right: 1.5rem;
+    box-sizing: content-box;
   }
 
   footer{
     width: 192rem;
     height: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .blk_pipe{
+    width: 3rem;
+    height: .6rem;
+    margin-right: 1.5rem;
+  }
+
+  footer .col-2{
+    align-items: center;
+  }
+
+  footer .col-1{
+    flex-direction: row;
+    align-items: center;
+  }
+
+  footer .col-3{
+    align-items: flex-end;
+  }
+
+  .icons img{
+    margin-left: 2.6rem;
+    width: 4rem;
+    height: 4rem;
   }
 
 }

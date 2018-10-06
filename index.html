@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title> ShoppingSunday </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
@@ -19,7 +20,8 @@
       <p style="margin:0">window.width: {{windowWidth}}</p>
     </div> -->
 
-<div class="background" ng-style="windowWidth > 601 && {{background}} || {{background_mobile}}">
+<!-- <div class="background" ng-style="windowWidth > 601 && {{background}} || {{background_mobile}}"> -->
+<div class="background" ng-style="windowWidth > 992 && {{background}} || {{background_mobile}}">
 
   <div class="container">
 
@@ -71,18 +73,19 @@
 </div>
 
 <footer class="container">
-  <div class="col-1">
-    2018
+  <div ng-show="windowWidth > 992" class="col-1">
+    <div class="blk_pipe"></div>
+    <p><b>2018 &nbsp </b></p>
   </div>
   <div class="col-2">
-    Koncept i wykonanie: <span> <b>Grupa KMK</b> </span>
+    <p><span ng-show="windowWidth < 992"><b>2018</b> | </span> Koncept i wykonanie: <b>Grupa KMK</b></p>
   </div>
   <div class="col-3">
-    <div class="icons">
-      <span>facebook</span>
-      <span>Be</span>
-      <span>LinkedIn</span>
-    </div>
+    <nav class="icons">
+      <a href="https://www.behance.net/"> <img src="./src/img/facebook_logo.svg" alt=""> </a>
+      <a href="https://www.behance.net/"> <img src="./src/img/behance_logo.svg" alt=""> </a>
+      <a href="https://www.behance.net/"> <img src="./src/img/linkedIn_logo.svg" alt=""> </a>
+    </nav>
 
   </div>
 </footer>
@@ -97,8 +100,8 @@ var app = angular.module('shoppingSunday', []);
 app.controller('myCtrl', ['$scope', '$filter', '$window', function($scope, $filter, $window) {
 
   // TODAY's date
-  $scope.today = new Date(2018, 9, 17); //TESTING
-  // $scope.today = new Date();
+  // $scope.today = new Date(2018, 9, 17); //TESTING
+  $scope.today = new Date();
 
   // DETERMINE CURRENT YEAR'S WEEK NUMBER (UTC added in order to count week's number starting MON)
   $scope.currentWeek =  +$filter('date')(new Date( $scope.today.getFullYear(), $scope.today.getMonth(), $scope.today.getDate()), 'ww', 'UTC');
@@ -119,35 +122,35 @@ app.controller('myCtrl', ['$scope', '$filter', '$window', function($scope, $filt
 
   // SUNDAYS - when stores are closed;
   $scope.sundays = [
-    {freeSun: false, date: new Date(2018, 9, 7), week: 40, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat center/cover", background_mobile: "url('./src/img/frankie-cordoba-526925-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: true, date: new Date(2018, 9, 14), week: 41, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2018, 9, 21), week: 42, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: false, date: new Date(2018, 9, 28), week: 43, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg') no-repeat center/cover", background_mobile: "url('./src/img/anna-utochkina-672220-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: false, date: new Date(2018, 10, 4), week: 44, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat center/cover", background_mobile: "url('./src/img/frankie-cordoba-526925-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: true, date: new Date(2018, 10, 11), week: 45, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2018, 10, 18), week: 46, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: false, date: new Date(2018, 10, 25), week: 47, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg') no-repeat center/cover", background_mobile: "url('./src/img/anna-utochkina-672220-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: false, date: new Date(2018, 11, 2), week: 48, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg') no-repeat center/cover", background_mobile: "url('./src/img/frankie-cordoba-526925-unsplash.jpg') no-repeat center/cover", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
-    {freeSun: true, date: new Date(2018, 11, 9), week: 49, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 1, 6), week: 1, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 1, 13), week: 2, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 1, 20), week: 3, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 2, 3), week: 5, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 2, 10), week: 6, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 2, 17), week: 7, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 3, 3), week: 9, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 3, 10), week: 10, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 3, 17), week: 11, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 3, 24), week: 12, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 4, 7), week: 14, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 4, 21), week: 16, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 5, 5), week: 18, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 5, 12), week: 19, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 5, 19), week: 20, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 6, 2), week: 22, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 6, 9), week: 23, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 6, 16), week: 24, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg') no-repeat center/cover", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
-    {freeSun: true, date: new Date(2019, 6, 23), week: 25, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg') no-repeat center/cover", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg') no-repeat center/cover", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"}
+    {freeSun: false, date: new Date(2018, 9, 7), week: 40, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg')", background_mobile: "url('./src/img/frankie-cordoba-526925-unsplash.jpg')", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: true, date: new Date(2018, 9, 14), week: 41, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2018, 9, 21), week: 42, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: false, date: new Date(2018, 9, 28), week: 43, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg')", background_mobile: "url('./src/img/anna-utochkina-672220-unsplash.jpg')", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: false, date: new Date(2018, 10, 4), week: 44, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg')", background_mobile: "url('./src/img/frankie-cordoba-526925-unsplash.jpg')", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: true, date: new Date(2018, 10, 11), week: 45, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2018, 10, 18), week: 46, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: false, date: new Date(2018, 10, 25), week: 47, background: "url('./src/img/180720_niedziela_handlowa_zdj2.jpg')", background_mobile: "url('./src/img/anna-utochkina-672220-unsplash.jpg')", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: false, date: new Date(2018, 11, 2), week: 48, background: "url('./src/img/180720_niedziela_handlowa_zdj1.jpg')", background_mobile: "url('./src/img/frankie-cordoba-526925-unsplash.jpg')", quote: "Biegnij do sklepu, świat za oknem poczeka..."},
+    {freeSun: true, date: new Date(2018, 11, 9), week: 49, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 1, 6), week: 1, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 1, 13), week: 2, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 1, 20), week: 3, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 2, 3), week: 5, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 2, 10), week: 6, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 2, 17), week: 7, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 3), week: 9, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 10), week: 10, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 17), week: 11, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 3, 24), week: 12, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 4, 7), week: 14, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 4, 21), week: 16, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 5, 5), week: 18, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 5, 12), week: 19, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 5, 19), week: 20, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 2), week: 22, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 9), week: 23, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 16), week: 24, background: "url('./src/img/180720_niedziela_handlowa_zdj3.jpg')", background_mobile: "url('./src/img/evan-kirby-226482-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"},
+    {freeSun: true, date: new Date(2019, 6, 23), week: 25, background: "url('./src/img/180720_niedziela_handlowa_zdj4.jpg')", background_mobile: "url('./src/img/sebastian-garcia-247546-unsplash.jpg')", quote: "Świat jest piękny, wyjdź na spacer z przyjacielem!"}
     ];
 
 
@@ -160,10 +163,16 @@ app.controller('myCtrl', ['$scope', '$filter', '$window', function($scope, $filt
         $scope.quote = val.quote;
         // STYLES change:
         $scope.background = {
-          "background" : val.background
+          "background" : val.background,
+          "background-repeat" : "no-repeat",
+          "background-position" : "center",
+          "background-size" : "cover"
         }
         $scope.background_mobile = {
-          "background" : val.background_mobile
+          "background" : val.background_mobile,
+          "background-repeat" : "no-repeat",
+          "background-position" : "center",
+          "background-size" : "cover"
         }
         $scope.CircleBlackOrWhite = {
           "background" : "black"
@@ -180,10 +189,16 @@ app.controller('myCtrl', ['$scope', '$filter', '$window', function($scope, $filt
         $scope.quote = val.quote;
         // STYLES change:
         $scope.background = {
-          "background" : val.background
+          "background" : val.background,
+          "background-repeat" : "no-repeat",
+          "background-position" : "center",
+          "background-size" : "cover"
         }
         $scope.background_mobile = {
-          "background" : val.background_mobile
+          "background" : val.background_mobile,
+          "background-repeat" : "no-repeat",
+          "background-position" : "center",
+          "background-size" : "cover"
         }
         $scope.CircleBlackOrWhite = {
           "background" : "white"
@@ -197,14 +212,9 @@ app.controller('myCtrl', ['$scope', '$filter', '$window', function($scope, $filt
 
     })
 
-    // $scope.getWindowSize = function(){
-    //   if($window.innerWidth < 500){
-    //     console.log('f.getWindowSize: ', $window.innerWidth);
-    //   }
-    // }
-
 }]);
 
+// WINDOW WIDTH WATCH
 app.directive('windowSize', function ($window) {
   return function (scope, element) {
     scope.getWindowDimensions = function () {
