@@ -44,7 +44,7 @@
           {{ getWeekNumber() }}
         </div> -->
         <!-- TEST END -->
-        <p ng-style="blackOrWhite">W najbliższą niedzielę ( {{sundayDate | date:'dd.MM'}} ) sklepy będą:</p>
+        <p ng-style="blackOrWhite">W najbliższą niedzielę <br ng-show="windowWidth < 600">( {{sundayDate | date:'dd.MM'}} ) sklepy będą:</p>
         <div class="circle" ng-style="CircleBlackOrWhite">
           <span ng-show="!closed" style="color: black">OTWARTE</span>
           <span ng-show="closed" style="color: white">ZAMKNIĘTE</span>
