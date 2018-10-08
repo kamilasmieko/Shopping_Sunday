@@ -35,7 +35,7 @@ body{
   font-weight: bold;
   position: relative;
 }
-#triangle-bottomright {
+.triangle-bottomright {
   position: absolute;
 }
 
@@ -132,10 +132,13 @@ footer{
     position: absolute;
     top: 61rem;
   }
-  #triangle-bottomright {
+  .triangle-bottomright {
     top: -2rem;
     right: 4rem;
-    border-bottom: 3rem solid black;
+    /* border-bottom: 3rem solid black; */
+    border-bottom-width: 3rem;
+    border-bottom-style: solid;
+    /* border-bottom-color: black; */
     border-left: 3rem solid transparent;
   }
 
@@ -233,10 +236,13 @@ footer{
     position: absolute;
     top: 72rem;
   }
-  #triangle-bottomright {
+  .triangle-bottomright {
     top: -3rem;
     right: 5.5rem;
-  	border-bottom: 3rem solid black;
+    /* border-bottom: 3rem solid black; */
+    border-bottom-width: 3rem;
+    border-bottom-style: solid;
+    /* border-bottom-color: black; */
   	border-left: 3rem solid transparent;
   }
 
@@ -342,10 +348,13 @@ footer{
     padding: 3.5rem 3.3rem 1.3rem 3.4rem;
     margin-bottom: 10.2rem;
   }
-  #triangle-bottomright {
+  .triangle-bottomright {
     top: -4rem;
     right: 7rem;
-  	border-bottom: 4rem solid black;
+    /* border-bottom: 4rem solid black; */
+    border-bottom-width: 4rem;
+    border-bottom-style: solid;
+    /* border-bottom-color: black; */
   	border-left: 4rem solid transparent;
   }
 

@@ -1,0 +1,22 @@
+{
+  "name": "shopping_sunday",
+  "version": "1.0.0",
+  "description": "Check if during this upcoming Sunday the stores will be open or closed. Project based on Angular.js.",
+  "main": "app.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamilasmieko/Shopping_Sunday.git"
+  },
+  "author": "KS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamilasmieko/Shopping_Sunday/issues"
+  },
+  "homepage": "https://github.com/kamilasmieko/Shopping_Sunday#readme",
+  "devDependencies": {
+    "json-server": "^0.14.0"
+  }
+}
